@@ -12,7 +12,6 @@ namespace BlogApp.Data.Entities
         public string PasswordHash { get; set; }
         public string Role { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-
         public ICollection<Post> Posts { get; set; }
         public ICollection<Comment> Comments { get; set; }
         public ICollection<UserRole> UserRoles { get; set; }

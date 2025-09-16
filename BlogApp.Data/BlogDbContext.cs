@@ -19,7 +19,6 @@ namespace BlogApp.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Configure many-to-many relationship for Post-Tag
             modelBuilder.Entity<PostTag>()
                 .HasKey(pt => new { pt.PostId, pt.TagId });
 
@@ -33,7 +32,6 @@ namespace BlogApp.Data
                 .WithMany(t => t.PostTags)
                 .HasForeignKey(pt => pt.TagId);
 
-            // Configure many-to-many relationship for User-Role
             modelBuilder.Entity<UserRole>()
                 .HasKey(ur => new { ur.UserId, ur.RoleId });
 
@@ -47,7 +45,6 @@ namespace BlogApp.Data
                 .WithMany(r => r.UserRoles)
                 .HasForeignKey(ur => ur.RoleId);
 
-            // Seed initial data
             modelBuilder.Entity<Role>().HasData(
                 new Role { Id = 1, Name = "Administrator" },
                 new Role { Id = 2, Name = "Moderator" },

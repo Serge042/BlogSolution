@@ -30,7 +30,6 @@ namespace BlogApp.Business.Services
                 new Claim(ClaimTypes.Email, user.Email)
             };
 
-            // Добавляем роли в клаймы
             foreach (var role in roles)
             {
                 claims.Add(new Claim(ClaimTypes.Role, role));

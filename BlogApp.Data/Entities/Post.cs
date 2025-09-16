@@ -13,11 +13,8 @@ namespace BlogApp.Data.Entities
         public int UserId { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
-
-        [NotMapped] // Это свойство не будет сохраняться в БД
+        [NotMapped]
         public string? TagsInput { get; set; }
-
-        // Навигационные свойства
         public User User { get; set; }
         public ICollection<Comment>? Comments { get; set; }
         public ICollection<PostTag>? PostTags { get; set; }

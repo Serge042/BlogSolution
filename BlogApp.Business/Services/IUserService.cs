@@ -15,8 +15,8 @@ namespace BlogApp.Business.Services
         Task<bool> UserExistsAsync(int id);
         Task<User> GetUserByEmailAsync(string email);
         Task<User> GetUserByUsernameAsync(string username);
-        Task<List<string>> GetUserRolesAsync(int userId); // Добавлен новый метод
-        Task<bool> AssignRoleToUserAsync(int userId, int roleId); // Добавлен новый метод
-        Task<bool> RemoveRoleFromUserAsync(int userId, int roleId); // Добавлен новый метод
+        Task<List<string>> GetUserRolesAsync(int userId);
+        Task<bool> AssignRoleToUserAsync(int userId, int roleId);
+        Task<bool> RemoveRoleFromUserAsync(int userId, int roleId);
     }
 }

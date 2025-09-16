@@ -25,17 +25,14 @@ builder.Services.AddScoped<IPostTagRepository, PostTagRepository>();
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 builder.Services.AddScoped<IUserRoleRepository, UserRoleRepository>();
 
-// Register services
 builder.Services.AddScoped<IPostService, PostService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITagService, TagService>();
 builder.Services.AddScoped<ICommentService, CommentService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 
-// Register JWT service
 builder.Services.AddSingleton<IJwtService, JwtService>();
 
-// Configure JWT authentication
 var jwtSettings = builder.Configuration.GetSection("Jwt");
 var key = Encoding.ASCII.GetBytes(jwtSettings["Secret"]);
 
@@ -57,7 +54,6 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-// Add authorization policies
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("RequireAdministratorRole", policy => policy.RequireRole("Administrator"));
@@ -67,7 +63,6 @@ builder.Services.AddAuthorization(options =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -79,7 +74,6 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-// Add authentication and authorization middleware
 app.UseAuthentication();
 app.UseAuthorization();
 

@@ -17,7 +17,6 @@ namespace BlogApp.Controllers
             _commentService = commentService;
         }
 
-        // GET: api/Comments
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Comment>>> GetComments()
         {
@@ -25,7 +24,6 @@ namespace BlogApp.Controllers
             return Ok(comments);
         }
 
-        // GET: api/Comments/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Comment>> GetComment(int id)
         {
@@ -39,7 +37,6 @@ namespace BlogApp.Controllers
             return comment;
         }
 
-        // GET: api/Comments/post/5
         [HttpGet("post/{postId}")]
         public async Task<ActionResult<IEnumerable<Comment>>> GetCommentsByPost(int postId)
         {
@@ -47,7 +44,6 @@ namespace BlogApp.Controllers
             return Ok(comments);
         }
 
-        // GET: api/Comments/user/5
         [HttpGet("user/{userId}")]
         public async Task<ActionResult<IEnumerable<Comment>>> GetCommentsByUser(int userId)
         {
@@ -55,7 +51,6 @@ namespace BlogApp.Controllers
             return Ok(comments);
         }
 
-        // POST: api/Comments
         [HttpPost]
         public async Task<ActionResult<Comment>> PostComment(Comment comment)
         {
@@ -63,7 +58,6 @@ namespace BlogApp.Controllers
             return CreatedAtAction(nameof(GetComment), new { id = createdComment.Id }, createdComment);
         }
 
-        // PUT: api/Comments/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutComment(int id, Comment comment)
         {
@@ -82,7 +76,6 @@ namespace BlogApp.Controllers
             return NoContent();
         }
 
-        // DELETE: api/Comments/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteComment(int id)
         {

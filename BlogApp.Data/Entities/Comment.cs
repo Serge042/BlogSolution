@@ -9,8 +9,6 @@ namespace BlogApp.Data.Entities
         public int UserId { get; set; }
         public int PostId { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-
-        // Навигационные свойства
         public User User { get; set; }
         public BlogApp.Data.Entities.Post Post { get; set; }
     }

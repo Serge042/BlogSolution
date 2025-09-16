@@ -6,10 +6,8 @@
 
 namespace BlogApp.Data.Migrations
 {
-    /// <inheritdoc />
     public partial class AddRolesAndUserRoles : Migration
     {
-        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -65,7 +63,6 @@ namespace BlogApp.Data.Migrations
                 column: "RoleId");
         }
 
-        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

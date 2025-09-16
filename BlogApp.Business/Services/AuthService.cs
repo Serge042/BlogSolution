@@ -31,10 +31,6 @@ namespace BlogApp.Business.Services
             if (user == null)
                 throw new UnauthorizedAccessException("Неверное имя пользователя или пароль");
 
-            // В реальном приложении здесь должна быть проверка хэша пароля
-            // if (!VerifyPasswordHash(request.Password, user.PasswordHash))
-            //     throw new UnauthorizedAccessException("Неверное имя пользователя или пароль");
-
             // Получаем роли пользователя
             var roles = await _userService.GetUserRolesAsync(user.Id);
 
@@ -70,7 +66,7 @@ namespace BlogApp.Business.Services
             {
                 Username = request.Username,
                 Email = request.Email,
-                PasswordHash = HashPassword(request.Password), // В реальном приложении хэшируем пароль
+                PasswordHash = HashPassword(request.Password),
                 CreatedAt = DateTime.UtcNow
             };
 
@@ -79,23 +75,19 @@ namespace BlogApp.Business.Services
             await _userRepository.SaveChangesAsync();
 
             // Назначаем роль "User" по умолчанию
-            var userRoleAssigned = await _userService.AssignRoleToUserAsync(user.Id, 3); // 3 = Role ID for "User"
+            var userRoleAssigned = await _userService.AssignRoleToUserAsync(user.Id, 3);
 
             return userRoleAssigned;
         }
 
         private string HashPassword(string password)
         {
-            // В реальном приложении используйте библиотеку для хэширования паролей, например BCrypt
-            // return BCrypt.Net.BCrypt.HashPassword(password);
-            return password; // Заглушка для демонстрации
+            return password;
         }
 
         private bool VerifyPasswordHash(string password, string storedHash)
         {
-            // В реальном приложении используйте библиотеку для проверки паролей, например BCrypt
-            // return BCrypt.Net.BCrypt.Verify(password, storedHash);
-            return password == storedHash; // Заглушка для демонстрации
+            return password == storedHash;
         }
     }
 }

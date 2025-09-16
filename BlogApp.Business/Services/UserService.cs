@@ -92,41 +92,6 @@ namespace BlogApp.Business.Services
             return user?.UserRoles?.Select(ur => ur.Role.Name).ToList() ?? new List<string>();
         }
 
-        //public async Task<bool> AssignRoleToUserAsync(int userId, int roleId)
-        //{
-        //    // Проверяем, существует ли пользователь
-        //    if (!await _userRepository.UserExistsAsync(userId))
-        //        return false;
-
-        //    // Проверяем, существует ли роль
-        //    if (!await _roleRepository.RoleExistsAsync(roleId))
-        //        return false;
-
-        //    // Проверяем, не назначена ли уже эта роль пользователю
-        //    if (await _userRoleRepository.UserRoleExistsAsync(userId, roleId))
-        //        return false;
-
-        //    // Назначаем роль
-        //    var userRole = new UserRole { UserId = userId, RoleId = roleId };
-        //    await _userRoleRepository.AddAsync(userRole);
-        //    await _userRoleRepository.SaveChangesAsync();
-
-        //    return true;
-        //}
-
-        //public async Task<bool> RemoveRoleFromUserAsync(int userId, int roleId)
-        //{
-        //    // Проверяем, существует ли связь пользователь-роль
-        //    var userRole = await _userRoleRepository.GetUserRoleAsync(userId, roleId);
-        //    if (userRole == null)
-        //        return false;
-
-        //    // Удаляем связь
-        //    _userRoleRepository.Remove(userRole);
-        //    await _userRoleRepository.SaveChangesAsync();
-
-        //    return true;
-        //}
 
         public async Task<User> GetUserByUsernameAsync(string username)
         {

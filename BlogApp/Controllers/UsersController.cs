@@ -10,7 +10,7 @@ namespace BlogApp.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize] // Требуется аутентификация для всех методов
+    [Authorize]
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
@@ -20,18 +20,16 @@ namespace BlogApp.Controllers
             _userService = userService;
         }
 
-        // GET: api/Users
         [HttpGet]
-        [Authorize(Policy = "RequireAdministratorRole")] // Только администратор
+        [Authorize(Policy = "RequireAdministratorRole")]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
             var users = await _userService.GetAllUsersAsync();
             return Ok(users);
         }
 
-        // GET: api/Users/5
         [HttpGet("{id}")]
-        [Authorize(Policy = "RequireUserRole")] // Любой аутентифицированный пользователь
+        [Authorize(Policy = "RequireUserRole")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
             // Пользователь может получать только свою информацию, 
@@ -54,7 +52,6 @@ namespace BlogApp.Controllers
             return user;
         }
 
-        // DELETE: api/Users/5
         [HttpDelete("{id}")]
         [Authorize(Policy = "RequireAdministratorRole")] // Только администратор
         public async Task<IActionResult> DeleteUser(int id)

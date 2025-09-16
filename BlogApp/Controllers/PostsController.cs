@@ -17,7 +17,6 @@ namespace BlogApp.Controllers
             _postService = postService;
         }
 
-        // GET: api/Posts
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Post>>> GetPosts()
         {
@@ -25,7 +24,6 @@ namespace BlogApp.Controllers
             return Ok(posts);
         }
 
-        // GET: api/Posts/with-tags
         [HttpGet("with-tags")]
         public async Task<ActionResult<IEnumerable<Post>>> GetPostsWithTags()
         {
@@ -33,7 +31,6 @@ namespace BlogApp.Controllers
             return Ok(posts);
         }
 
-        // GET: api/Posts/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Post>> GetPost(int id)
         {
@@ -47,7 +44,6 @@ namespace BlogApp.Controllers
             return post;
         }
 
-        // GET: api/Posts/5/with-comments
         [HttpGet("{id}/with-comments")]
         public async Task<ActionResult<Post>> GetPostWithComments(int id)
         {
@@ -61,7 +57,6 @@ namespace BlogApp.Controllers
             return post;
         }
 
-        // GET: api/Posts/author/5
         [HttpGet("author/{authorId}")]
         public async Task<ActionResult<IEnumerable<Post>>> GetPostsByAuthor(int authorId)
         {
@@ -69,7 +64,6 @@ namespace BlogApp.Controllers
             return Ok(posts);
         }
 
-        // POST: api/Posts
         [HttpPost]
         public async Task<ActionResult<Post>> PostPost(Post post)
         {
@@ -77,7 +71,6 @@ namespace BlogApp.Controllers
             return CreatedAtAction(nameof(GetPost), new { id = createdPost.Id }, createdPost);
         }
 
-        // PUT: api/Posts/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutPost(int id, Post post)
         {
@@ -96,7 +89,6 @@ namespace BlogApp.Controllers
             return NoContent();
         }
 
-        // DELETE: api/Posts/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePost(int id)
         {

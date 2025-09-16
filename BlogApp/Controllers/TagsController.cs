@@ -17,7 +17,6 @@ namespace BlogApp.Controllers
             _tagService = tagService;
         }
 
-        // GET: api/Tags
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Tag>>> GetTags()
         {
@@ -25,7 +24,6 @@ namespace BlogApp.Controllers
             return Ok(tags);
         }
 
-        // GET: api/Tags/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Tag>> GetTag(int id)
         {
@@ -39,7 +37,6 @@ namespace BlogApp.Controllers
             return tag;
         }
 
-        // GET: api/Tags/name/dotnet
         [HttpGet("name/{name}")]
         public async Task<ActionResult<Tag>> GetTagByName(string name)
         {
@@ -53,7 +50,6 @@ namespace BlogApp.Controllers
             return tag;
         }
 
-        // POST: api/Tags
         [HttpPost]
         public async Task<ActionResult<Tag>> PostTag(Tag tag)
         {
@@ -61,7 +57,6 @@ namespace BlogApp.Controllers
             return CreatedAtAction(nameof(GetTag), new { id = createdTag.Id }, createdTag);
         }
 
-        // PUT: api/Tags/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTag(int id, Tag tag)
         {
@@ -80,7 +75,6 @@ namespace BlogApp.Controllers
             return NoContent();
         }
 
-        // DELETE: api/Tags/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTag(int id)
         {
