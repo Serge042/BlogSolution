@@ -1,5 +1,5 @@
-﻿using BlogApp.Data.Entities;
-using BlogApp.Data.Interfaces;
+﻿using BlogApp.Data.Interfaces;
+using BlogApp.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -11,12 +11,12 @@ namespace BlogApp.Business.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly IUserService _userService;
-        private readonly JwtService _jwtService;
+        private readonly IJwtService _jwtService;
 
         public AuthService(
             IUserRepository userRepository,
             IUserService userService,
-            JwtService jwtService)
+            IJwtService jwtService)
         {
             _userRepository = userRepository;
             _userService = userService;

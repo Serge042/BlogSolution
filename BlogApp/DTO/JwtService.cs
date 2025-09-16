@@ -9,7 +9,7 @@ using System.Text;
 
 namespace BlogApp.Business.Services
 {
-    public class JwtService
+    public class JwtService : IJwtService
     {
         private readonly IConfiguration _configuration;
 

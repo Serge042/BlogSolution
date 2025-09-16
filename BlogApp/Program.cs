@@ -7,8 +7,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
-
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -32,16 +30,10 @@ builder.Services.AddScoped<IPostService, PostService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITagService, TagService>();
 builder.Services.AddScoped<ICommentService, CommentService>();
-
-// Register JWT service with configuration
-builder.Services.AddSingleton(serviceProvider =>
-{
-    var configuration = serviceProvider.GetRequiredService<IConfiguration>();
-    return new JwtService(configuration);
-});
-
-// Register AuthService
 builder.Services.AddScoped<IAuthService, AuthService>();
+
+// Register JWT service
+builder.Services.AddSingleton<IJwtService, JwtService>();
 
 // Configure JWT authentication
 var jwtSettings = builder.Configuration.GetSection("Jwt");
