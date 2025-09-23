@@ -1,0 +1,108 @@
+﻿@model BlogApp.Data.Entities.Post
+
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h1 class="card-title">@Model.Title</h1>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <span class="text-muted">Автор: @Model.User.Username</span> |
+                        <span class="text-muted">Опубликовано: @Model.CreatedAt.ToString("dd.MM.yyyy")</span>
+                    </div>
+                    <div>
+                        <span class="badge badge-secondary">Просмотры: 0</span>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    @if (Model.PostTags != null)
+                    {
+                        foreach (var postTag in Model.PostTags)
+                        {
+                            <span class="badge badge-info">@postTag.Tag.Name</span>
+                        }
+                    }
+                </div>
+
+                <div class="article-content">
+                    @Html.Raw(Model.Body.Replace("\n", "<br>"))
+                </div>
+            </div>
+            <div class="card-footer">
+                <a asp-action="Index" class="btn btn-secondary">Назад к списку статей</a>
+
+                @if (User.Identity.IsAuthenticated && (User.IsInRole("Administrator") || User.IsInRole("Moderator") || Model.User.Username == User.Identity.Name))
+                {
+                    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Редактировать</a>
+
+                    @if (User.IsInRole("Administrator") || Model.User.Username == User.Identity.Name)
+                    {
+                        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Удалить</a>
+                    }
+                }
+            </div>
+        </div>
+
+        <!-- Комментарии -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5>Комментарии</h5>
+            </div>
+            <div class="card-body">
+                @if (Model.Comments != null && Model.Comments.Any())
+                {
+                    foreach (var comment in Model.Comments)
+                    {
+                        <div class="media mb-3">
+                            <div class="media-body">
+                                <h6 class="mt-0">@comment.User.Username</h6>
+                                <p>@comment.Body</p>
+                                <small class="text-muted">@comment.CreatedAt.ToString("dd.MM.yyyy HH:mm")</small>
+
+                                @if (User.Identity.IsAuthenticated && (User.IsInRole("Administrator") || User.IsInRole("Moderator") || comment.User.Username == User.Identity.Name))
+                                {
+                                    <div class="mt-2">
+                                        <a href="#" class="btn btn-sm btn-outline-warning">Редактировать</a>
+
+                                        @if (User.IsInRole("Administrator") || comment.User.Username == User.Identity.Name)
+                                        {
+                                            <a href="#" class="btn btn-sm btn-outline-danger">Удалить</a>
+                                        }
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <hr>
+                    }
+                }
+                else
+                {
+                    <p>Комментариев пока нет.</p>
+                }
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <form method="post" asp-controller="Comments" asp-action="Create">
+                        <input type="hidden" name="PostId" value="@Model.Id" />
+                        <div class="form-group">
+                            <label for="commentBody">Добавить комментарий</label>
+                            <textarea class="form-control" id="commentBody" name="Body" rows="3" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Отправить</button>
+                    </form>
+                }
+                else
+                {
+                    <div class="alert alert-info">
+                        <a asp-controller="Auth" asp-action="Login">Войдите</a>, чтобы оставить комментарий.
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

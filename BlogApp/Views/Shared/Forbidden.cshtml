@@ -1,6 +1,5 @@
-﻿@model ErrorViewModel
-@{
-    ViewData["Title"] = "Ошибка";
+﻿@{
+    ViewData["Title"] = "Доступ запрещен";
     Layout = "_Layout";
 }
 
@@ -9,29 +8,18 @@
         <div class="col-md-8 text-center">
             <div class="error-container">
                 <div class="error-icon">
-                    <i class="fas fa-exclamation-circle fa-5x text-danger"></i>
+                    <i class="fas fa-ban fa-5x text-danger"></i>
                 </div>
-                <h1 class="error-title mt-4">500 - Внутренняя ошибка сервера</h1>
+                <h1 class="error-title mt-4">403 - Доступ запрещен</h1>
                 <p class="error-message">
-                    Что-то пошло не так. Мы уже работаем над устранением проблемы.
+                    У вас нет необходимых прав для доступа к этой странице.
                 </p>
-
-                @if (Model != null && Model.ShowRequestId)
-                {
-                    <p class="request-id">
-                        <strong>ID запроса:</strong> <code>@Model.RequestId</code>
-                    </p>
-                }
-
                 <div class="error-actions mt-4">
                     <a asp-controller="Home" asp-action="Index" class="btn btn-primary">
                         <i class="fas fa-home"></i> На главную
                     </a>
                     <a href="javascript:history.back()" class="btn btn-secondary ml-2">
                         <i class="fas fa-arrow-left"></i> Назад
-                    </a>
-                    <a asp-controller="Home" asp-action="Contact" class="btn btn-info ml-2">
-                        <i class="fas fa-envelope"></i> Сообщить о проблеме
                     </a>
                 </div>
             </div>
@@ -56,12 +44,6 @@
 
     .error-message {
         font-size: 1.2rem;
-        color: #6c757d;
-        margin-bottom: 30px;
-    }
-
-    .request-id {
-        font-size: 0.9rem;
         color: #6c757d;
         margin-bottom: 30px;
     }

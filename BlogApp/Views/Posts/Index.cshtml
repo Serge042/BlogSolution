@@ -1,0 +1,61 @@
+﻿@model IEnumerable<BlogApp.Data.Entities.Post>
+
+@{
+    ViewData["Title"] = "Статьи";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+                <h3>Список статей</h3>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a asp-controller="Posts" asp-action="Create" class="btn btn-light">
+                        <i class="fas fa-plus"></i> Новая статья
+                    </a>
+                }
+            </div>
+            <div class="card-body">
+                @if(Model != null) {
+                @foreach (var post in Model)
+                {
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a asp-action="Details" asp-route-id="@post.Id" class="text-decoration-none">@post.Title</a>
+                            </h5>
+                            <h6 class="card-subtitle mb-2 text-muted">
+                                Автор: @post.User.Username |
+                                Опубликовано: @post.CreatedAt.ToString("dd.MM.yyyy") |
+                                Просмотры: 0
+                            </h6>
+                            <p class="card-text">@post.Summary</p>
+                            <div class="mb-2">
+                                @if (post.PostTags != null)
+                                {
+                                    foreach (var postTag in post.PostTags)
+                                    {
+                                        <span class="badge badge-info">@postTag.Tag.Name</span>
+                                    }
+                                }
+                            </div>
+                            <a asp-action="Details" asp-route-id="@post.Id" class="btn btn-primary">Читать далее</a>
+
+                            @if (User.Identity.IsAuthenticated && (User.IsInRole("Administrator") || User.IsInRole("Moderator") || post.User.Username == User.Identity.Name))
+                            {
+                                <a asp-action="Edit" asp-route-id="@post.Id" class="btn btn-warning">Редактировать</a>
+
+                                @if (User.IsInRole("Administrator") || post.User.Username == User.Identity.Name)
+                                {
+                                    <a asp-action="Delete" asp-route-id="@post.Id" class="btn btn-danger">Удалить</a>
+                                }
+                            }
+                        </div>
+                    </div>
+                }
+                }
+            </div>
+        </div>
+    </div>
+</div>

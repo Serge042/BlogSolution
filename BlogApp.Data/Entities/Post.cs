@@ -15,6 +15,7 @@ namespace BlogApp.Data.Entities
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
         [NotMapped]
         public string? TagsInput { get; set; }
+        public string? Summary { get; set; }
         public User User { get; set; }
         public ICollection<Comment>? Comments { get; set; }
         public ICollection<PostTag>? PostTags { get; set; }

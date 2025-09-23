@@ -1,0 +1,41 @@
+﻿@model IEnumerable<BlogApp.Data.Entities.Role>
+
+@{
+    ViewData["Title"] = "Роли";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header bg-warning text-white d-flex justify-content-between align-items-center">
+                <h3>Список ролей</h3>
+                <a asp-action="Create" class="btn btn-light">Добавить роль</a>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    @foreach (var role in Model)
+                    {
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">@role.Name</h5>
+                                    <p class="card-text">@role.Description</p>
+                                    <p class="card-text">
+                                        @if (role.UserRoles != null)
+                                        {
+                                            <small class="text-muted">Назначена @role.UserRoles.Count пользователям</small>
+                                        }
+                                    </p>
+                                </div>
+                                <div class="card-footer">
+                                    <a asp-action="Edit" asp-route-id="@role.Id" class="btn btn-sm btn-primary">Редактировать</a>
+                                    <a asp-action="Delete" asp-route-id="@role.Id" class="btn btn-sm btn-danger">Удалить</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

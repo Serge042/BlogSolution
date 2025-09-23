@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BlogApp.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class TagsController : ControllerBase
+    //[ApiController]
+    //[Route("api/[controller]")]
+    public class TagsController : Controller
     {
         private readonly ITagService _tagService;
 
@@ -18,13 +18,22 @@ namespace BlogApp.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+            return View();
+        }
+        public async Task<IActionResult> Create()
+        {
+            return View();
+        }
+        //[HttpGet("{id}")]
         public async Task<ActionResult<IEnumerable<Tag>>> GetTags()
         {
             var tags = await _tagService.GetAllTagsAsync();
             return Ok(tags);
         }
 
-        [HttpGet("{id}")]
+        //[HttpGet("{id}")]
         public async Task<ActionResult<Tag>> GetTag(int id)
         {
             var tag = await _tagService.GetTagByIdAsync(id);

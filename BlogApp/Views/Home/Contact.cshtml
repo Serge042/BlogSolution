@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "Контакты";
+}
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h2>Контакты</h2>
+            </div>
+            <div class="card-body">
+                <p class="lead">Свяжитесь с нами, если у вас есть вопросы или предложения!</p>
+
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <h4>Контактная информация</h4>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-envelope mr-2"></i> Email: info@myblog.com</li>
+                            <li><i class="fas fa-phone mr-2"></i> Телефон: +7 (123) 456-78-90</li>
+                            <li><i class="fas fa-map-marker-alt mr-2"></i> Адрес: г. Москва, ул. Примерная, д. 123</li>
+                        </ul>
+
+                        <h4 class="mt-4">Социальные сети</h4>
+                        <div class="social-links">
+                            <a href="#" class="btn btn-outline-primary mr-2"><i class="fab fa-vk"></i> ВКонтакте</a>
+                            <a href="#" class="btn btn-outline-info mr-2"><i class="fab fa-telegram"></i> Telegram</a>
+                            <a href="#" class="btn btn-outline-dark"><i class="fab fa-github"></i> GitHub</a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <h4>Форма обратной связи</h4>
+                        <form>
+                            <div class="form-group">
+                                <label for="name">Ваше имя</label>
+                                <input type="text" class="form-control" id="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Сообщение</label>
+                                <textarea class="form-control" id="message" rows="4" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Отправить</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

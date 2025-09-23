@@ -1,0 +1,62 @@
+﻿@model BlogApp.Data.Entities.Post
+
+@{
+    ViewData["Title"] = "Добавление статьи";
+    var tags = ViewBag.Tags as List<BlogApp.Data.Entities.Tag>;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h3 class="text-center">Добавление новой статьи</h3>
+            </div>
+            <div class="card-body">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label asp-for="Title" class="control-label">Заголовок статьи</label>
+                        <input asp-for="Title" class="form-control" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Summary" class="control-label">Краткое содержание</label>
+                        <textarea asp-for="Summary" class="form-control" rows="3"></textarea>
+                        <span asp-validation-for="Summary" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Body" class="control-label">Текст статьи</label>
+                        <textarea asp-for="Body" class="form-control" rows="10"></textarea>
+                        <span asp-validation-for="Body" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Теги</label>
+                        <div>
+                            @if (tags != null)
+                            {
+                                foreach (var tag in tags)
+                                {
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" name="SelectedTags" value="@tag.Id" id="tag-@tag.Id">
+                                        <label class="form-check-label" for="tag-@tag.Id">@tag.Name</label>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block">Опубликовать статью</button>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <a asp-action="Index" class="btn btn-secondary">Назад к списку статей</a>
+            </div>
+        </div>
+    </div>
+</div>

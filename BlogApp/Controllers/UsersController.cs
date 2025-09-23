@@ -2,16 +2,14 @@
 using BlogApp.Data.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace BlogApp.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
     [Authorize]
-    public class UsersController : ControllerBase
+    public class UsersController : Controller
     {
         private readonly IUserService _userService;
 
@@ -50,6 +48,17 @@ namespace BlogApp.Controllers
             }
 
             return user;
+        }
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            var user = await _userService.GetUserByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return View(user);
         }
 
         [HttpDelete("{id}")]

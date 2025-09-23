@@ -5,15 +5,25 @@ using System.Threading.Tasks;
 
 namespace BlogApp.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class AuthController : ControllerBase
+    //[ApiController]
+    //[Route("api/[controller]")]
+    public class AuthController : Controller
     {
         private readonly IAuthService _authService;
 
         public AuthController(IAuthService authService)
         {
             _authService = authService;
+        }
+        [HttpGet("auth/login")]
+
+        public async Task<IActionResult> Login()
+        {
+            return View();
+        }
+        public async Task<IActionResult> Register()
+        {
+            return View();
         }
 
         [HttpPost("login")]

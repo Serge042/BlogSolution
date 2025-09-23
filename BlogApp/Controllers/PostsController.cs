@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BlogApp.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class PostsController : ControllerBase
+    //[ApiController]
+    //[Route("api/[controller]")]
+    public class PostsController : Controller
     {
         private readonly IPostService _postService;
 
@@ -16,8 +16,16 @@ namespace BlogApp.Controllers
         {
             _postService = postService;
         }
-
         [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+            return View();
+        }
+        public async Task<IActionResult> Create()
+        {
+            return View();
+        }
+        //[HttpGet("{id}")]
         public async Task<ActionResult<IEnumerable<Post>>> GetPosts()
         {
             var posts = await _postService.GetAllPostsAsync();
@@ -31,7 +39,7 @@ namespace BlogApp.Controllers
             return Ok(posts);
         }
 
-        [HttpGet("{id}")]
+        //[HttpGet("{id}")]
         public async Task<ActionResult<Post>> GetPost(int id)
         {
             var post = await _postService.GetPostByIdAsync(id);

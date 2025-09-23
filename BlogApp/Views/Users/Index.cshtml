@@ -1,0 +1,56 @@
+﻿@model IEnumerable<BlogApp.Data.Entities.User>
+
+@{
+    ViewData["Title"] = "Пользователи";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                <h3>Список пользователей</h3>
+                @if (User.IsInRole("Administrator"))
+                {
+                    <a asp-action="Create" class="btn btn-light">Добавить пользователя</a>
+                }
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    @foreach (var user in Model)
+                    {
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">@user.Username</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">@user.Email</h6>
+                                    <p class="card-text">
+                                        <strong>Роли:</strong>
+                                        @if (user.UserRoles != null)
+                                        {
+                                            foreach (var userRole in user.UserRoles)
+                                            {
+                                                <span class="badge badge-primary">@userRole.Role.Name</span>
+                                            }
+                                        }
+                                    </p>
+                                    <p class="card-text">
+                                        <small class="text-muted">Зарегистрирован: @user.CreatedAt.ToString("dd.MM.yyyy")</small>
+                                    </p>
+                                </div>
+                                <div class="card-footer">
+                                    <a asp-action="Details" asp-route-id="@user.Id" class="btn btn-sm btn-info">Подробнее</a>
+
+                                    @if (User.IsInRole("Administrator"))
+                                    {
+                                        <a asp-action="Edit" asp-route-id="@user.Id" class="btn btn-sm btn-warning">Редактировать</a>
+                                        <a asp-action="Delete" asp-route-id="@user.Id" class="btn btn-sm btn-danger">Удалить</a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

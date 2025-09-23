@@ -1,0 +1,44 @@
+﻿@model IEnumerable<BlogApp.Data.Entities.Tag>
+
+@{
+    ViewData["Title"] = "Теги";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
+                <h3>Список тегов</h3>
+                <a asp-action="Create" class="btn btn-light">Добавить тег</a>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    @if (Model != null) {
+                    @foreach (var tag in Model)
+                    {
+                        <div class="col-md-3 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">
+                                        <span class="badge badge-pill badge-info p-2">@tag.Name</span>
+                                    </h5>
+                                    <p class="card-text">
+                                        @if (tag.PostTags != null)
+                                        {
+                                            <small class="text-muted">Используется в @tag.PostTags.Count статей</small>
+                                        }
+                                    </p>
+                                </div>
+                                <div class="card-footer text-center">
+                                    <a asp-action="Edit" asp-route-id="@tag.Id" class="btn btn-sm btn-warning">Редактировать</a>
+                                    <a asp-action="Delete" asp-route-id="@tag.Id" class="btn btn-sm btn-danger">Удалить</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
