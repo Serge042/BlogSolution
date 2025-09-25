@@ -21,6 +21,8 @@ namespace BlogApp.Controllers
         {
             return View();
         }
+        [HttpGet("auth/register")]
+
         public async Task<IActionResult> Register()
         {
             return View();
